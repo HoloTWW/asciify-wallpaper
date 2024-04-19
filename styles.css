@@ -1,0 +1,16 @@
+body{
+    background-color:rgb(66, 169, 59);
+}
+
+.img-input{
+    min-height: 128px;
+    max-height: 480px;
+    min-width: 128px;
+
+    width: auto;
+    display:block;
+    text-align: center;
+    justify-content: center;
+    background-color:rgb(188, 188, 188);
+}
+
