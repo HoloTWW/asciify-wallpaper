@@ -10,8 +10,24 @@
     
     <h3> Input image</h3>
     <input type="file" id="input-image" accept=".jpg, .png, .jpeg">
-    <input type="button" name="ds"> 
     
+    
+    <div>
+        
+        <input 
+            type="range" 
+            id="input-range" 
+            value="2"
+            min="2"
+            max="32"
+            step="1">
+            <span id="range-ind">0</span>
+    </div>
+    
+    <h2>Result</h2>
+    
+    <canvas id="canvas-output" class='img-input'></canvas>
     
     <script src="scripts/img-in.js" ></script>
+    <script src="scripts/img2a.js"></script>
 </body>
