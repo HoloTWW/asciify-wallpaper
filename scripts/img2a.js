@@ -1,48 +1,58 @@
+document.getElementById('input-range').addEventListener('input',(event =>{
+    const block = parseInt(event.target.value);
+    document.getElementById('range-ind').innerHTML = block;
+    
+    compressCanvas(block,'canvas-img','img-input');
+    
 
-document.getElementById('input-range').addEventListener('change', (event)=>{
-    
-    document.getElementById('range-ind').innerHTML = event.target.value;
-    
+}))
+
+function compressCanvas(depth,canvasId ,imgId){
+    // in: depth:integer ,canvasId:string, imgId:string
+    // out: void
+
     const img = new Image();
-    img.src = document.getElementById('img-input').src;
+    img.src = document.getElementById(imgId).src;
 
+    const canvas = document.getElementById(canvasId);
+    const context = canvas.getContext('2d');
 
-    // const stepX = img.width / event.target.value;
-    const block = event.target.value;
-
-    const canvas = document.getElementById('canvas-output');
-        const ctx = canvas.getContext('2d');
-        
+    img.onload = function (){
+    
         canvas.width = img.width;
         canvas.height = img.height;
+        context.drawImage(img,0,0, img.width, img.height);
 
-        ctx.drawImage(img,0,0,img.width,img.height);
+        const imageData = context.getImageData(0,0,canvas.width,canvas.height);
+    
 
-        const  pixels =  ctx.getImageData(0,0,canvas.width,canvas.height);
+        //- Обработка пикселей
 
+        for (let rowBlock = 0; rowBlock < canvas.height; rowBlock += depth){
+            for (let colBlock = 0; colBlock < canvas.width * 4; colBlock += depth * 4){
+                // Усредненный цвет
+                let rgb = [1,2,3];
+                for (let row = rowBlock; row < (rowBlock + depth) && (row < canvas.height); row += 1){
+                    for (let col = colBlock; (col < colBlock + depth * 4 ) && (col < canvas.width * 4); col += 4 ){
+                        rgb[0] += imageData.data[canvas.width * row * 4 + col];
+                        rgb[1] += imageData.data[canvas.width * row * 4 + col + 1];
+                        rgb[2] += imageData.data[canvas.width * row * 4 + col + 2];
+                    }
+                }
+                rgb = rgb.map(value => value / (depth * depth));
+        
+                // Усредняем значения
 
-        var pixel = 4;
-
-        console.log(pixels.data.length)
-
-        for (let i = 0; i < pixels.data.length; i += pixel * block){
-            
-            // средний цвет блока
-            var r = 0
-            var g = 0
-            var b = 0
-            for (let j = i; j < i + pixel * block; j += 4){
-                r += pixels.data[j]
-                g += pixels.data[j + 1]
-                b += pixels.data[j + 2]
-            }
-            for (let j = i; j < i + pixel * block; j += 4){
-                pixels.data[j] = r / block
-                pixels.data[j + 1] = g / block
-                pixels.data[j + 2] = b / block
+                for (let row = rowBlock; row < rowBlock + depth; row += 1){
+                    for (let col = colBlock; (col < colBlock + depth * 4 ) && (col < canvas.width * 4); col += 4 ){
+                            imageData.data[canvas.width * row * 4 + col] = rgb[0];
+                            imageData.data[canvas.width * row * 4 + col + 1] = rgb[1];
+                            imageData.data[canvas.width * row * 4 + col + 2] = rgb[2];
+                    }
+                }
             }
         }
 
-        ctx.putImageData(pixels,0,0);    
-});
-
+        context.putImageData(imageData,0,0);
+    }
+}
