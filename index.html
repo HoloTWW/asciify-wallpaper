@@ -6,7 +6,21 @@
     <h1> ASCII Wallpaper</h1>
     
     <h2>Img to Ascii </h2>
-    <img id="img-input" class="img-input" src="none.jpg" alt="" />
+    <div>
+        <span style="display: inline-block;">
+            <img id="img-input" class="img-input" src="placeholder.jpg" alt="" />
+            <h3> Исходное изображение </h3>
+        </span>
+        <span style="display: inline-block;">
+            <canvas id="canvas-img" class='img-input'></canvas>
+            <h3> Степень сжатия</h3>
+        </span>
+        <span style="display: inline-block;">
+            <canvas id="canvas-ascii" class="img-input"> </canvas>
+            <h3>Ascii</h3>
+        </span>
+    </div>
+    
     
     <h3> Input image</h3>
     <input type="file" id="input-image" accept=".jpg, .png, .jpeg">
@@ -19,14 +33,14 @@
             id="input-range" 
             value="2"
             min="2"
-            max="32"
+            max="64"
             step="1">
             <span id="range-ind">0</span>
     </div>
     
     <h2>Result</h2>
     
-    <canvas id="canvas-output" class='img-input'></canvas>
+    
     
     <script src="scripts/img-in.js" ></script>
     <script src="scripts/img2a.js"></script>
