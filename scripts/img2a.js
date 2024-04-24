@@ -1,3 +1,24 @@
+document.getElementById('input-image').addEventListener('change', (event)=>{
+    if (event.target.files.length = 0){
+        return;
+    }
+    
+    const file = event.target.files[0]
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        document.getElementById('img-input').src = e.target.result
+        
+        const block =  parseInt(document.getElementById('input-range').value);  
+        console.log(block);
+        const data = (compressCanvas(block,'canvas-img','img-input'));
+        const canvasImg = document.getElementById('canvas-img');
+        asciifyCanvas(block,data,'black','Monospace','canvas-ascii',canvasImg.width,canvasImg.height);
+
+    };
+    reader.readAsDataURL(file)
+});
+
 document.getElementById('input-range').addEventListener('input',(event =>{
     const block = parseInt(event.target.value);
     document.getElementById('range-ind').innerHTML = block;
