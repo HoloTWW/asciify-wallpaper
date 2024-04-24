@@ -1,45 +1,94 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.input.css">
 </head>
 <body>
-    <h1> ASCII Wallpaper</h1>
+    <div class="control-panel">
+        <span class="control-component">
+            <h4>Ваше изображение</h4>
+            <label class="input-file">
+                <input type="file" id="input-image" accept=".jpg, .png, .jpeg">
+                <span>Выберите файл</span>
+            </label>
+        </span>
+        
+        <table class="control-component">
+            <h4>Степень сжатия</h4>
+            <tr>
+                <td>
+                    <input style="width: 90%;" type="range" id="input-range" value="4" min="4" max="64" step="2">
+                </td>
+                <td>
+                    <span id="range-ind">4</span>
+                </td>
+            </tr>
+        </table>
+
+        <table class="control-component">
+            <h4>Параметры ASCII</h4>
+            <tr>
+                <td>Глубина цвета</td>
+                <td>
+                    <select id="select-color-depth" style="width: 100%;">
+                        <option>2</option>
+                        <option>4</option>
+                        <option selected>8</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Цвет фона</td>
+                <td><input id="input-color" type="color" value="black" style="width: 100%;"></td>
+            </tr>
+            <tr>
+                <td>Набор ASCII</td>
+                <td>
+                    <select id="select-ascii" style="width: 100%;">
+                        <option>Вариант 1</option>
+                        <option>Вариант 2</option>
+                        <option>Вариант 3</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <table class="control-component">
+            <h4>Показывать</h4>
+            <tr>
+                <td><label for="chk-source">Исходное изображение</label></td>
+                <td><input type="checkbox" id="chk-source" checked></td>
+            </tr>
+            <tr>
+                <td><label for="chk-source">Исходное изображение</label></td>
+                <td><input type="checkbox" id="chk-source" checked></td>
+            </tr>
+            <tr>
+                <td><label for="chk-compressed">Сжатое изображение</label></td>
+                <td><input type="checkbox" id="chk-compressed" checked></td>
+            </tr>
+        </table>
+
+        
+        
+    </div>
     
-    <h2>Img to Ascii </h2>
-    <div>
-        <span style="display: inline-block;">
+    <div class="content">
+        <span class="card">
             <img id="img-input" class="img-input" src="placeholder.jpg" alt="" />
             <h3> Исходное изображение </h3>
         </span>
-        <span style="display: inline-block;">
+        <span class="card">
             <canvas id="canvas-img" class='img-input'></canvas>
             <h3> Степень сжатия</h3>
         </span>
-        <span style="display: inline-block;">
+        <span class="card">
             <canvas id="canvas-ascii" class="img-input"> </canvas>
             <h3>Ascii</h3>
         </span>
+        <span>
+        </span>
     </div>
-    
-    
-    <h3> Input image</h3>
-    <input type="file" id="input-image" accept=".jpg, .png, .jpeg">
-    
-    
-    <div>
-        
-        <input 
-            type="range" 
-            id="input-range" 
-            value="2"
-            min="2"
-            max="64"
-            step="1">
-            <span id="range-ind">0</span>
-    </div>
-    
-    <h2>Result</h2>
-    
     
     
     <script src="scripts/img-in.js" ></script>
