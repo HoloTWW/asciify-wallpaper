@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="styles.input.css">
 </head>
 <body>
-    <div class="control-panel">
+    <div id="control-panel" class="control-panel">
         <span class="control-component">
             <h4>Ваше изображение</h4>
             <label class="input-file">
@@ -60,11 +60,11 @@
                 <td><input type="checkbox" id="chk-source" checked></td>
             </tr>
             <tr>
-                <td><label for="chk-source">Исходное изображение</label></td>
+                <td><label for="chk-compressed">Сжатое изображение</label></td>
                 <td><input type="checkbox" id="chk-source" checked></td>
             </tr>
             <tr>
-                <td><label for="chk-compressed">Сжатое изображение</label></td>
+                <td><label for="chk-ascii">ASCII изображение</label></td>
                 <td><input type="checkbox" id="chk-compressed" checked></td>
             </tr>
         </table>
@@ -80,17 +80,15 @@
         </span>
         <span class="card">
             <canvas id="canvas-img" class='img-input'></canvas>
-            <h3> Степень сжатия</h3>
+            <h3> Сжатое изображение</h3>
         </span>
         <span class="card">
             <canvas id="canvas-ascii" class="img-input"> </canvas>
-            <h3>Ascii</h3>
+            <h3>ASCII изображение</h3>
         </span>
         <span>
         </span>
     </div>
     
-    
-    <script src="scripts/img-in.js" ></script>
     <script src="scripts/img2a.js"></script>
 </body>

@@ -1,34 +1,39 @@
-document.getElementById('input-image').addEventListener('change', (event)=>{
-    if (event.target.files.length = 0){
-        return;
+
+document.getElementById('control-panel').addEventListener('input', (event) =>{
+    if (event.target.tagName == 'INPUT'){
+        renderImage();
     }
-    
-    const file = event.target.files[0]
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        document.getElementById('img-input').src = e.target.result
-        
-        const block =  parseInt(document.getElementById('input-range').value);  
-        console.log(block);
-        const data = (compressCanvas(block,'canvas-img','img-input'));
-        const canvasImg = document.getElementById('canvas-img');
-        asciifyCanvas(block,data,'black','Monospace','canvas-ascii',canvasImg.width,canvasImg.height);
-
-    };
-    reader.readAsDataURL(file)
 });
 
-document.getElementById('input-range').addEventListener('input',(event =>{
-    const block = parseInt(event.target.value);
-    document.getElementById('range-ind').innerHTML = block;
+// document.getElementById('input-image').addEventListener('change', (event)=>{
+//     if (event.target.files.length = 0){
+//         return;
+//     }
     
-    // const compressed =  
+//     const file = event.target.files[0]
+//     const reader = new FileReader();
+
+//     reader.onload = function(e) {
+//         document.getElementById('img-input').src = e.target.result;
+//         renderImage();
+//     };
+//     reader.readAsDataURL(file)
+// });
+
+// re-render events
+
+// document.getElementById('input-range').addEventListener('input',(event =>{
+//     document.getElementById('range-ind').innerHTML = event.target.value;
+//     renderImage();
+// }))
+
+
+function renderImage(){
+    const block =  parseInt(document.getElementById('input-range').value);  
     const data = (compressCanvas(block,'canvas-img','img-input'));
     const canvasImg = document.getElementById('canvas-img');
     asciifyCanvas(block,data,'black','Monospace','canvas-ascii',canvasImg.width,canvasImg.height);
-    
-}))
+}
 
 
 function asciifyCanvas(depth,data,bgColor,font,canvasId,canvasWidth,canvasHeight){
