@@ -23,10 +23,36 @@ h4{
 .img-input{
     max-width: 100%;
     height: auto;
-    /* display:inline-block; */
     text-align: center;
     justify-content: center;
     background-color:rgb(169, 169, 169);
+}
+
+.a-download{
+    display: block;
+    user-select: none;
+    border: 0px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    text-align:center;
+    background-color:rgb(40, 152, 44);
+    color:white;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.a-download:hover{
+    background-color:rgb(43, 174, 47);
+    transition: 0.2s;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0px 0px 3px black; 
+}
+
+.a-download:active{
+    background-color: #2E703A;
+    box-shadow: -1px 0px 3px black;
 }
 
 .control-panel {
@@ -36,7 +62,6 @@ h4{
     padding: 10px;
     background-color: rgb(234, 232, 232);
 }
-
 
 .control-component{
     width: 100%;

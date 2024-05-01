@@ -1,23 +1,25 @@
 .input-file {
+	width: 100%;
 	position: relative;
 	display: inline-block;
 }
 
 .input-file span {
+	width: 100%;
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
 	outline: none;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 15px;
 	vertical-align: middle;
 	color: rgb(255 255 255);
 	text-align: center;
 	border-radius: 4px;
-	background-color: #419152;
+	background-color:rgb(40, 152, 44);
 	line-height: 22px;
 	height: 35px;
-	padding: 10px 20px;
+	padding: 10px ;
 	box-sizing: border-box;
 	border: none;
 	margin: 0;
@@ -42,7 +44,9 @@
 /* Hover/active */
 
 .input-file:hover span {
-	background-color: #59be6e;
+	background-color:rgb(43, 174, 47);
+	transition: 0.2s;
+    font-size: 16px;
 }
 
 .input-file:active span {
