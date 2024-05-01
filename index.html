@@ -5,13 +5,21 @@
 </head>
 <body>
     <div id="control-panel" class="control-panel">
-        <span class="control-component">
+        <div class="control-component">
             <h4>Ваше изображение</h4>
             <label class="input-file">
                 <input type="file" id="input-image" accept=".jpg, .png, .jpeg">
                 <span>Выберите файл</span>
             </label>
-        </span>
+        </div>
+
+        <div class="control-component">
+            <h4>Скачать</h4>
+            <span>
+                <a id="dwn-pixel" class="a-download">Сжатое изображение</a>
+                <a id="dwn-ascii" class="a-download">ASCII изображение</a>
+            </span>
+        </div>
         
         <table class="control-component">
             <h4>Степень сжатия</h4>
@@ -45,10 +53,7 @@
             <tr>
                 <td>Набор ASCII</td>
                 <td>
-                    <select id="select-ascii" style="width: 100%;">
-                        <!-- <option>Вариант 1</option> -->
-                        <!-- <option>Вариант 2</option> -->
-                    </select>
+                    <select id="select-ascii" style="width: 100%;"></select>
                 </td>
             </tr>
         </table>
@@ -68,9 +73,6 @@
                 <td><input type="checkbox" id="chk-ascii" checked></td>
             </tr>
         </table>
-
-        
-        
     </div>
     
     <div class="content">

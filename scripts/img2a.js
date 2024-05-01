@@ -25,6 +25,16 @@ function main(){
 main();
 
 
+document.getElementById('dwn-pixel').addEventListener('click',(event)=>{
+    downloadImage('canvas-pixel');
+});
+
+
+document.getElementById('dwn-ascii').addEventListener('click',(event)=>{
+    downloadImage('canvas-ascii');
+});
+
+
 document.getElementById('control-panel').addEventListener('input', (event) =>{
     if (event.target.tagName != 'INPUT' && event.target.tagName != 'SELECT'){
         return;
@@ -34,6 +44,7 @@ document.getElementById('control-panel').addEventListener('input', (event) =>{
     }
     renderImage();
 });
+
 
 document.getElementById('input-image').addEventListener('change', (event)=>{
     if (event.target.files.length = 0){
@@ -51,6 +62,14 @@ document.getElementById('input-image').addEventListener('change', (event)=>{
     reader.readAsDataURL(file)
 });
 
+
+function downloadImage(canvasId){
+    let link = document.createElement('a');
+    link.download = 'asciifyImage.png';
+    link.href = document.getElementById(canvasId).toDataURL();
+    link.click();
+    link.remove();
+}
 
 function renderImage(){
     // Глубина сжатия
