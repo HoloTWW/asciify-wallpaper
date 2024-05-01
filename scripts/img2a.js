@@ -1,3 +1,23 @@
+const asciiKits = [
+    " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@",
+    " .'`^\",:;Il!i><~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$",
+    " .'`,:;-+~!"
+]
+
+function main(){
+    // Заполнить select набора ascii
+    let selectAscii = document.getElementById('select-ascii');
+    let opt;
+    for (let i = 0; i < asciiKits.length; i += 1){
+        opt = document.createElement('option');
+        opt.innerHTML = `Набор ${i+1} <br> [${asciiKits[i].length}]`
+        selectAscii.appendChild(opt);
+    }
+}
+
+main();
+
+
 document.getElementById('control-panel').addEventListener('input', (event) =>{
     if (event.target.tagName != 'INPUT' && event.target.tagName != 'SELECT'){
         return;
@@ -26,28 +46,29 @@ document.getElementById('input-image').addEventListener('change', (event)=>{
 
 
 function renderImage(){
-    // range-input
+    // Глубина сжатия
     const block =  parseInt(document.getElementById('input-range').value);
     document.getElementById('range-ind').innerHTML = block;
 
-    // ASCII params
+    // ASCII параметры
     const bgColor = document.getElementById('input-color').value;
     const colorDepth = parseInt(document.getElementById('select-color-depth').value);
+    const asciiKit = asciiKits[document.getElementById('select-ascii').selectedIndex];
 
     const data = (compressCanvas(block,colorDepth,'canvas-pixel','img-input'));
     const canvasImg = document.getElementById('canvas-pixel');
 
-    // Hide images
+    // Прячем изображения
     document.getElementById('image').hidden = !document.getElementById('chk-source').checked;
     document.getElementById('pixel').hidden = !document.getElementById('chk-pixel').checked;
     document.getElementById('ascii').hidden = !document.getElementById('chk-ascii').checked;
 
 
-    asciifyCanvas(block,data,bgColor,'Monospace','canvas-ascii',canvasImg.width,canvasImg.height);
+    asciifyCanvas(block,data,asciiKit,bgColor,'Monospace','canvas-ascii',canvasImg.width,canvasImg.height);
 }
 
 
-function asciifyCanvas(depth,data,bgColor,font,canvasId,canvasWidth,canvasHeight){
+function asciifyCanvas(depth,data,asciiKit,bgColor,font,canvasId,canvasWidth,canvasHeight){
     const canvasAscii = document.getElementById(canvasId);
     const context = canvasAscii.getContext('2d');
     canvasAscii.height = canvasHeight;
@@ -57,16 +78,14 @@ function asciifyCanvas(depth,data,bgColor,font,canvasId,canvasWidth,canvasHeight
     context.fillStyle = bgColor;
     context.fillRect(0,0,canvasAscii.width,canvasAscii.height);
 
-    const ascii = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"
-
     let rows = data.length;
     let cols = data[0].length;
 
     for (let row = 0; row < rows; row += 1){
         for (let col = 0; col < cols; col += 1){
-            let index = Math.floor(ascii.length * ((data[row][col][0] + data[row][col][1] + data[row][col][2]) / (255 * 3)));
+            let index = Math.floor(asciiKit.length * ((data[row][col][0] + data[row][col][1] + data[row][col][2]) / (255 * 3)));
             context.fillStyle =`rgb(${data[row][col][0]},${data[row][col][1]},${data[row][col][2]})`;
-            context.fillText(ascii[index],depth * col + depth * 0.2,depth * row + depth)   
+            context.fillText(asciiKit[index],depth * col + depth * 0.2,depth * row + depth)   
         }
     }
 }
