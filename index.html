@@ -60,12 +60,12 @@
                 <td><input type="checkbox" id="chk-source" checked></td>
             </tr>
             <tr>
-                <td><label for="chk-compressed">Сжатое изображение</label></td>
-                <td><input type="checkbox" id="chk-source" checked></td>
+                <td><label for="chk-pixel">Сжатое изображение</label></td>
+                <td><input type="checkbox" id="chk-pixel" checked></td>
             </tr>
             <tr>
                 <td><label for="chk-ascii">ASCII изображение</label></td>
-                <td><input type="checkbox" id="chk-compressed" checked></td>
+                <td><input type="checkbox" id="chk-ascii" checked></td>
             </tr>
         </table>
 
@@ -74,19 +74,17 @@
     </div>
     
     <div class="content">
-        <span class="card">
+        <span id="image" class="card">
             <img id="img-input" class="img-input" src="placeholder.jpg" alt="" />
             <h3> Исходное изображение </h3>
         </span>
-        <span class="card">
-            <canvas id="canvas-img" class='img-input'></canvas>
+        <span id="pixel" class="card">
+            <canvas id="canvas-pixel" class='img-input'></canvas>
             <h3> Сжатое изображение</h3>
         </span>
-        <span class="card">
+        <span id="ascii" class="card">
             <canvas id="canvas-ascii" class="img-input"> </canvas>
             <h3>ASCII изображение</h3>
-        </span>
-        <span>
         </span>
     </div>
     

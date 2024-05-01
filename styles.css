@@ -12,7 +12,7 @@ h4{
     margin-left: 17rem;
 }
 
-.card {
+.card:not([hidden]) {
     border: 1px solid rgba(0, 0, 0, 0.128);
     border-radius: 5px;
     padding: 10px;
@@ -23,7 +23,7 @@ h4{
 .img-input{
     max-width: 100%;
     height: auto;
-    display:inline-block;
+    /* display:inline-block; */
     text-align: center;
     justify-content: center;
     background-color:rgb(169, 169, 169);

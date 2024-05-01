@@ -1,38 +1,48 @@
-
 document.getElementById('control-panel').addEventListener('input', (event) =>{
-    if (event.target.tagName == 'INPUT'){
-        renderImage();
+    if (event.target.tagName != 'INPUT'){
+        return;
     }
+    if (event.target.type == 'file'){
+        return;
+    }
+    renderImage();
 });
 
-// document.getElementById('input-image').addEventListener('change', (event)=>{
-//     if (event.target.files.length = 0){
-//         return;
-//     }
+document.getElementById('input-image').addEventListener('change', (event)=>{
+    if (event.target.files.length = 0){
+        return;
+    }
     
-//     const file = event.target.files[0]
-//     const reader = new FileReader();
+    const file = event.target.files[0]
+    const reader = new FileReader();
 
-//     reader.onload = function(e) {
-//         document.getElementById('img-input').src = e.target.result;
-//         renderImage();
-//     };
-//     reader.readAsDataURL(file)
-// });
+    reader.onload = function(e) {
+        document.getElementById('img-input').src = e.target.result;
+        renderImage();  
+    };
 
-// re-render events
-
-// document.getElementById('input-range').addEventListener('input',(event =>{
-//     document.getElementById('range-ind').innerHTML = event.target.value;
-//     renderImage();
-// }))
+    reader.readAsDataURL(file)
+});
 
 
 function renderImage(){
-    const block =  parseInt(document.getElementById('input-range').value);  
-    const data = (compressCanvas(block,'canvas-img','img-input'));
-    const canvasImg = document.getElementById('canvas-img');
-    asciifyCanvas(block,data,'black','Monospace','canvas-ascii',canvasImg.width,canvasImg.height);
+    // range-input
+    const block =  parseInt(document.getElementById('input-range').value);
+    document.getElementById('range-ind').innerHTML = block;
+    
+    const data = (compressCanvas(block,'canvas-pixel','img-input'));
+    const canvasImg = document.getElementById('canvas-pixel');
+
+    // ASCII params
+    const bgColor = document.getElementById('input-color').value;
+
+    // Hide images
+    document.getElementById('image').hidden = !document.getElementById('chk-source').checked;
+    document.getElementById('pixel').hidden = !document.getElementById('chk-pixel').checked;
+    document.getElementById('ascii').hidden = !document.getElementById('chk-ascii').checked;
+
+
+    asciifyCanvas(block,data,bgColor,'Monospace','canvas-ascii',canvasImg.width,canvasImg.height);
 }
 
 
