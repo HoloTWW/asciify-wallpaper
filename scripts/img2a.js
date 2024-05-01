@@ -13,6 +13,13 @@ function main(){
         opt.innerHTML = `Набор ${i+1} <br> [${asciiKits[i].length}]`
         selectAscii.appendChild(opt);
     }
+
+    // Первичный рендер
+    const imgInput = document.getElementById('img-input');
+    imgInput.onload = function(){
+        renderImage();
+    }
+    
 }
 
 main();
