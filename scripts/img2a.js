@@ -1,5 +1,5 @@
 document.getElementById('control-panel').addEventListener('input', (event) =>{
-    if (event.target.tagName != 'INPUT'){
+    if (event.target.tagName != 'INPUT' && event.target.tagName != 'SELECT'){
         return;
     }
     if (event.target.type == 'file'){
@@ -29,12 +29,13 @@ function renderImage(){
     // range-input
     const block =  parseInt(document.getElementById('input-range').value);
     document.getElementById('range-ind').innerHTML = block;
-    
-    const data = (compressCanvas(block,'canvas-pixel','img-input'));
-    const canvasImg = document.getElementById('canvas-pixel');
 
     // ASCII params
     const bgColor = document.getElementById('input-color').value;
+    const colorDepth = parseInt(document.getElementById('select-color-depth').value);
+
+    const data = (compressCanvas(block,colorDepth,'canvas-pixel','img-input'));
+    const canvasImg = document.getElementById('canvas-pixel');
 
     // Hide images
     document.getElementById('image').hidden = !document.getElementById('chk-source').checked;
@@ -70,8 +71,12 @@ function asciifyCanvas(depth,data,bgColor,font,canvasId,canvasWidth,canvasHeight
     }
 }
 
+function toColorDepth(rgb,colorDepth){
+    return  rgb.map(value => (Math.round(value * (Math.pow(2,colorDepth) - 1) / 255) * 255 / (Math.pow(2,colorDepth) - 1)) * 0.99);
+}
 
-function compressCanvas(depth,canvasId ,imgId){
+
+function compressCanvas(depth,colorDepth,canvasId ,imgId){
     // in: depth:integer ,canvasId:string, imgId:string
     // out: void
 
@@ -106,6 +111,9 @@ function compressCanvas(depth,canvasId ,imgId){
                 }
             }
             rgb = rgb.map(value => value / (depth * depth));
+            
+            // Применяем глубину цвета
+            rgb = toColorDepth(rgb,colorDepth);
     
             // Усредняем значения
             for (let row = rowBlock; row < rowBlock + depth; row += 1){
@@ -115,6 +123,7 @@ function compressCanvas(depth,canvasId ,imgId){
                         imageData.data[canvas.width * row * 4 + col + 2] = rgb[2];
                 }
             }
+
             // Сохраняем сжатый массив
             compresedImg[compresedImg.length - 1].push([rgb[0],rgb[1],rgb[2],imageData.data[3]]);
         }
